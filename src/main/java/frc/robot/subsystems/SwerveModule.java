@@ -4,9 +4,9 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkLowLevel;
+// import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
+// import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -41,11 +41,11 @@ public class SwerveModule extends SubsystemBase {
     this.abosoluteEncoderReversed = abosoluteEncoderReversed;
     absoluteEncoder = new AnalogInput(absoluteEncoderId);
     
-    driveMotor = new CANSparkMax(driveMotorId, driveMotor.getMotorType()); //if code doesnt work this is prob why
-    turningMotor = new CANSparkMax(turningMotorId, turningMotor.getMotorType());
+    driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless); //if code doesnt work this is prob why
+    turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
-    driveEncoder = driveMotor.getEncoder();//fill these parameters in tomorrow cause ermm...
-    turningEncoder = turningMotor.getEncoder();//error on lines 44 & 45 r connected to this
+     driveEncoder = driveMotor.getEncoder();//fill these parameters in tomorrow cause ermm...
+     turningEncoder = turningMotor.getEncoder();//error on lines 44 & 45 r connected to this
 
 
     driveMotor.setInverted(driveMotorReversed);
@@ -99,12 +99,16 @@ public class SwerveModule extends SubsystemBase {
 
   public void setDesiredState(SwerveModuleState state){
     if(Math.abs(state.speedMetersPerSecond) < 0.001){
-      stop(); //prob just renamed, update to 24 version
+      stop();
       return;
     }
     state = SwerveModuleState.optimize(state, getState().angle);
     driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhyscialMaxSpeedMetersPerSecond);
     turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     SmartDashboard.putString("Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
+  }
+  public void stop(){
+    driveMotor.set(0);
+    turningMotor.set(0);
   }
 }
