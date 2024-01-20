@@ -37,7 +37,9 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_driverController.start().onTrue(swerveSubsystem.zeroHeading());
+    if(m_driverController.getStartButton())
+      swerveSubsystem.zeroHeading();
+    // m_driverController.b().whileTrue(swerveSubsystem.zeroHeading());
    
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
