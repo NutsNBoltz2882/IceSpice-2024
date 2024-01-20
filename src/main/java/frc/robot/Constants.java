@@ -23,8 +23,8 @@ public final class Constants {
   public static final class ModuleConstants{
     //fix all of these dimensions
     public static final double kWheelDiameterMeters = 0.102; // 4 in converted to m cause units class wont work
-        public static final double kDriveMotorGearRatio = 1 / 5.8462;
-        public static final double kTurningMotorGearRatio = 1 / 18.0;
+        public static final double kDriveMotorGearRatio = 1 / 6.75;
+        public static final double kTurningMotorGearRatio = 1 / 21.4286;
         public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters;
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
@@ -32,11 +32,11 @@ public final class Constants {
         public static final double kPTurning = 0.5;
   }
     public static final class DriveConstants{
-      //fix all port numbers and measurements and stuff
+      //fix all port numbers and max speeds
        
-      public static final double kTrackWidth = 0.5334;
+      public static final double kTrackWidth = 0.3683;
         // Distance between right and left wheels
-        public static final double kWheelBase = 0.6477;
+        public static final double kWheelBase = 0.5461;
         // Distance between front and back wheels
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
                 new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
