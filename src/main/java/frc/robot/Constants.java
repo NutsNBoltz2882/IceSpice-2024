@@ -13,6 +13,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity
  */
 import static edu.wpi.first.units.Units.*;
+
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.units.Units;
 
 public final class Constants {
@@ -30,6 +33,19 @@ public final class Constants {
   }
     public static final class DriveConstants{
       //fix all port numbers and measurements and stuff
+       
+      public static final double kTrackWidth = 0.5334;
+        // Distance between right and left wheels
+        public static final double kWheelBase = 0.6477;
+        // Distance between front and back wheels
+        public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
+                new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+                new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+                new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
+                new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
+      
+      
+      
       public static final int kFrontLeftDriveMotorPort = 8;
       public static final int kBackLeftDriveMotorPort = 2;
       public static final int kFrontRightDriveMotorPort = 6;
@@ -66,10 +82,22 @@ public final class Constants {
       public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -4.811;
 
       public static final double kPhyscialMaxSpeedMetersPerSecond = 5;
+      public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
+      public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3.0;
+
+      public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhyscialMaxSpeedMetersPerSecond / 4;
+      public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
 
     }
 
     public static class OperatorConstants {
       public static final int kDriverControllerPort = 0;
+      public static final double kDeadband = 0.05;
+      public static final int kDriverYAxis = 1;
+      public static final int kDriverXAxis = 0;
+      public static final int kDriverRotAxis = 4;
+      public static final int kDriverFieldOrientedButtonIdx = 1;
+
+
     }
 }
