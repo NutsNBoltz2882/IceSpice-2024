@@ -91,7 +91,7 @@ public final class Constants {
     }
 
     public static class IntakeConstants {
-      public static final int jointMotorID = 0;
+      public static final int kjointMotorPort = 0;
     }
 
     public static class OperatorConstants {
