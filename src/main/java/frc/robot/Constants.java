@@ -92,10 +92,15 @@ public final class Constants {
 
     public static class IntakeConstants {
       public static final int kjointMotorPort = 0;
+      public static final int kRollerMotorPort = 0;
+      public static final double intakeExtendedSetpoint = 0;
+      public static final double intakeMin = 0;
+      public static final double intakeMax = 0;
     }
 
     public static class OperatorConstants {
       public static final int kDriverControllerPort = 0;
+      public static final int kIntakeControllerPort = 1;
       public static final double kDeadband = 0.05;
       public static final int kDriverYAxis = 1;
       public static final int kDriverXAxis = 0;
