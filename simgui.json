@@ -1,0 +1,43 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/IntakeBelt": "Subsystem",
+      "/LiveWindow/IntakeBelt/Belt": "Motor Controller",
+      "/LiveWindow/Shooter": "Motor Controller",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/chainMount/chainMotor": "Motor Controller",
+      "/SmartDashboard/AlignSelf": "Command",
+      "/SmartDashboard/Auto Mode": "String Chooser",
+      "/SmartDashboard/Autonomous Command": "Command",
+      "/SmartDashboard/Recive": "Command",
+      "/SmartDashboard/Shoot": "Command",
+      "/SmartDashboard/getDown": "Command",
+      "/SmartDashboard/getUp": "Command",
+      "/SmartDashboard/moveArm": "Command",
+      "/SmartDashboard/pickUpFromGround": "Command",
+      "/SmartDashboard/sendToShooter": "Command"
+    }
+  },
+  "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "open": true
+    },
+    "shuffleboard@1": {
+      "Publishers": {
+        "open": true
+      },
+      "Subscribers": {
+        "open": true
+      },
+      "open": true
+    },
+    "visible": true
+  }
+}
