@@ -2,6 +2,7 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/IntakeBelt": "Subsystem",
       "/LiveWindow/IntakeBelt/Belt": "Motor Controller",
       "/LiveWindow/Shooter": "Motor Controller",

@@ -10,8 +10,8 @@
       "style": "0",
       "userScale": "2",
       "width": "2240",
-      "xpos": "-1",
-      "ypos": "-1"
+      "xpos": "299",
+      "ypos": "226"
     }
   },
   "Table": {
@@ -28,15 +28,20 @@
     }
   },
   "Window": {
+    "###/FMSInfo": {
+      "Collapsed": "0",
+      "Pos": "274,134",
+      "Size": "269,248"
+    },
     "###FMS": {
       "Collapsed": "0",
       "Pos": "8,945",
-      "Size": "442,200"
+      "Size": "442,194"
     },
     "###Joysticks": {
       "Collapsed": "0",
-      "Pos": "437,813",
-      "Size": "1336,100"
+      "Pos": "529,834",
+      "Size": "1336,354"
     },
     "###NetworkTables": {
       "Collapsed": "0",
@@ -71,7 +76,7 @@
     "Robot State": {
       "Collapsed": "0",
       "Pos": "5,20",
-      "Size": "144,144"
+      "Size": "144,170"
     }
   }
 }
