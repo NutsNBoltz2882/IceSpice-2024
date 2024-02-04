@@ -3,8 +3,11 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/Intake/Intake Motor": "Motor Controller",
       "/LiveWindow/IntakeBelt": "Subsystem",
       "/LiveWindow/IntakeBelt/Belt": "Motor Controller",
+      "/LiveWindow/IntakeWheels": "Subsystem",
+      "/LiveWindow/IntakeWheels/Belt": "Motor Controller",
       "/LiveWindow/Shooter": "Motor Controller",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/chainMount/chainMotor": "Motor Controller",
@@ -15,9 +18,11 @@
       "/SmartDashboard/Shoot": "Command",
       "/SmartDashboard/getDown": "Command",
       "/SmartDashboard/getUp": "Command",
+      "/SmartDashboard/intakeShoot": "Command",
       "/SmartDashboard/moveArm": "Command",
       "/SmartDashboard/pickUpFromGround": "Command",
-      "/SmartDashboard/sendToShooter": "Command"
+      "/SmartDashboard/sendToShooter": "Command",
+      "/SmartDashboard/spinIntakeWheels": "Command"
     }
   },
   "NetworkTables Info": {

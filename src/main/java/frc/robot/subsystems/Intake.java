@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
         double degrees = intakeEncoder.get();
 
         // Print or use the degrees as needed
-        System.out.println("Intake Position (Degrees): " + degrees);
+       // System.out.println("Intake Position (Degrees): " + degrees);
     }
 
     /**

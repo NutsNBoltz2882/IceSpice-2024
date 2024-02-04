@@ -1,0 +1,27 @@
+{
+  "NetworkTables": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/AlignSelf": "Command",
+      "/SmartDashboard/Auto Mode": "String Chooser",
+      "/SmartDashboard/Autonomous Command": "Command",
+      "/SmartDashboard/Recive": "Command",
+      "/SmartDashboard/Shoot": "Command",
+      "/SmartDashboard/getDown": "Command",
+      "/SmartDashboard/getUp": "Command",
+      "/SmartDashboard/intakeShoot": "Command",
+      "/SmartDashboard/moveArm": "Command",
+      "/SmartDashboard/spinIntakeWheels": "Command"
+    }
+  },
+  "NetworkTables Info": {
+    "Connections": {
+      "open": true
+    },
+    "visible": true
+  },
+  "NetworkTables Settings": {
+    "mode": "Client (NT4)",
+    "serverTeam": "localhost"
+  }
+}
