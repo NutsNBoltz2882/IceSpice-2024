@@ -11,6 +11,7 @@
 // ROBOTBUILDER TYPE: Command.
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import java.util.function.DoubleSupplier;
 
@@ -54,8 +55,49 @@ public class moveArm extends Command {
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
-    public void execute() {
+public void execute() {
+    // Get the current position in degrees
+    double currentPos = m_intake.getIntakeEncoderPosition();
+
+    // Print or use the current position as needed
+    System.out.println("Intake Current Position (Degrees): " + currentPos);
+
+    // Set the target position to 50 degrees
+    double targetPosition = 50.0;
+
+    // Example: Adjust motor speed based on the error between current position and target position
+    double error = targetPosition - currentPos;
+    double kP = 0.01; // Adjust this proportional constant as needed
+
+    // Example: If the intake is below the target position, move the arm forward
+    if (Math.abs(error) > 1.0) { // Check if the error is greater than 1 degree to avoid constant movement
+        // Calculate motor speed based on the error
+        double motorSpeed = kP * error;
+
+        // Set the motor speed to move the arm
+        m_intake.moveArm(motorSpeed);
+    } else {
+        // Stop the motor if the intake is at or above the target position
+        m_intake.stopArm();
     }
+    if (Math.abs(error) > 1.0) { // Check if the error is greater than 1 degree to avoid constant movement
+        // Calculate motor speed based on the error
+        double motorSpeed = kP * error;
+
+        // Set the motor speed to move the arm
+        m_intake.moveArm(motorSpeed);
+
+        // Display the current position on SmartDashboard
+        SmartDashboard.putNumber("Intake Current Position (Degrees)", currentPos);
+    } else {
+        // Stop the motor if the intake is at or above the target position
+        m_intake.stopArm();
+
+        // Display the current position on SmartDashboard
+        SmartDashboard.putNumber("Intake Current Position (Degrees)", currentPos);
+    }
+}
+
 
     // Called once the command ends or is interrupted.
     @Override
