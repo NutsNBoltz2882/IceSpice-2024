@@ -56,7 +56,7 @@ public class SwerveModule extends SubsystemBase {
     turningEncoder.setPositionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
     turningEncoder.setVelocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
 
-    turningPidController = new PIDController(ModuleConstants.kPTurning, absoluteEncoderId, absoluteEncoderOffset);
+    turningPidController = new PIDController(ModuleConstants.kPTurning, 0, 0);
     turningPidController.enableContinuousInput(-Math.PI, Math.PI);
   }
 

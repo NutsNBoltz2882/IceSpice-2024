@@ -22,7 +22,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kFrontLeftTurningMotorPort, 
       DriveConstants.kFrontLeftDriveEncoderReversed,
       DriveConstants.kFrontLeftTurningEncoderReversed, 
-      DriveConstants.kFrontLeftDriveAbsoluteEncoderPort,
+      DriveConstants.kFrontLeftDriveAbsoluteEncoderID,
       DriveConstants.kFrontLeftDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kFrontLeftDriveAbsoluteEncoderReversed);
 
@@ -31,7 +31,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kBackLeftTurningMotorPort, 
       DriveConstants.kBackLeftDriveEncoderReversed,
       DriveConstants.kBackLeftTurningEncoderReversed, 
-      DriveConstants.kBackLeftDriveAbsoluteEncoderPort,
+      DriveConstants.kBackLeftDriveAbsoluteEncoderID,
       DriveConstants.kBackLeftDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kBackLeftDriveAbsoluteEncoderReversed);
 
@@ -40,7 +40,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kFrontRightTurningMotorPort, 
       DriveConstants.kFrontRightDriveEncoderReversed,
       DriveConstants.kFrontRightTurningEncoderReversed, 
-      DriveConstants.kFrontRightDriveAbsoluteEncoderPort,
+      DriveConstants.kFrontRightDriveAbsoluteEncoderID,
       DriveConstants.kFrontRightDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kFrontRightDriveAbsoluteEncoderReversed);
 
@@ -49,7 +49,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kBackRightTurningMotorPort, 
       DriveConstants.kBackRightDriveEncoderReversed,
       DriveConstants.kBackRightTurningEncoderReversed, 
-      DriveConstants.kBackRightDriveAbsoluteEncoderPort,
+      DriveConstants.kBackRightDriveAbsoluteEncoderID,
       DriveConstants.kBackRightDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kBackRightDriveAbsoluteEncoderReversed);
 
