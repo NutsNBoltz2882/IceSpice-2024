@@ -4,11 +4,13 @@
 
 package frc.robot;
 
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SwerveDrive;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.GroundIntake;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,9 +22,14 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+  private final GroundIntake groundIntake = 
+      new GroundIntake(IntakeConstants.kLiftMotorID, IntakeConstants.kRollerMotorID);
 
   private final XboxController m_driverController =
       new XboxController(OperatorConstants.kDriverControllerPort);
+
+  private final CommandXboxController m_IntakeController =
+      new CommandXboxController(OperatorConstants.kIntakeControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -39,6 +46,9 @@ public class RobotContainer {
   private void configureBindings() {
     if(m_driverController.getStartButton())
       swerveSubsystem.zeroHeading();
+
+    m_IntakeController.leftBumper().whileTrue(groundIntake.getLiftCommand());
+    m_IntakeController.rightBumper().whileTrue(groundIntake.getRollerCommand());
     // m_driverController.b().whileTrue(swerveSubsystem.zeroHeading());
    
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,

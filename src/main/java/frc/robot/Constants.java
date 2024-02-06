@@ -90,8 +90,15 @@ public final class Constants {
 
     }
 
+    public static class IntakeConstants{
+      public static final int kLiftMotorID = 10;
+      public static final int kRollerMotorID = 11;
+
+    }
+
     public static class OperatorConstants {
       public static final int kDriverControllerPort = 0;
+      public static final int kIntakeControllerPort = 1;
       public static final double kDeadband = 0.05;
       public static final int kDriverYAxis = 1;
       public static final int kDriverXAxis = 0;
