@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.AbsoluteEncoder;
 // import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 // import com.revrobotics.RelativeEncoder;
@@ -39,13 +40,13 @@ public class SwerveModule extends SubsystemBase {
   int absoluteEncoderId, double absoluteEncoderOffset, boolean abosoluteEncoderReversed) {
     this.absoluteEncoderOffsetRad = absoluteEncoderOffset;
     this.abosoluteEncoderReversed = abosoluteEncoderReversed;
-    absoluteEncoder = new AnalogInput(absoluteEncoderId);
+    AbsoluteEncoder = new AnalogInput(absoluteEncoderId);
     
-    driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless); //if code doesnt work this is prob why
+    driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless); 
     turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
-     driveEncoder = driveMotor.getEncoder();//fill these parameters in tomorrow cause ermm...
-     turningEncoder = turningMotor.getEncoder();//error on lines 44 & 45 r connected to this
+     driveEncoder = driveMotor.getEncoder();
+     turningEncoder = turningMotor.getEncoder();
 
 
     driveMotor.setInverted(driveMotorReversed);
