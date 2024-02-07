@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ModuleConstants;
+
 import com.kauailabs.navx.frc.AHRS;
 
 public class SwerveSubsystem extends SubsystemBase {
@@ -83,6 +85,11 @@ public class SwerveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Robot Heading", getHeading());
+    SmartDashboard.putNumber("FL encoder", frontLeft.getTurningPosition() * ModuleConstants.kTurningEncoderRot2Rad );
+    SmartDashboard.putNumber("FR encoder", frontRight.getTurningPosition() * ModuleConstants.kTurningEncoderRot2Rad);
+    SmartDashboard.putNumber("BL encoder", backLeft.getTurningPosition() * ModuleConstants.kTurningEncoderRot2Rad); 
+    SmartDashboard.putNumber("BR encoder", backRight.getTurningPosition()* ModuleConstants.kTurningEncoderRot2Rad);
+
   }
 
   public void stopModules(){
