@@ -66,6 +66,7 @@ public final class Constants {
       public static final boolean kFrontRightDriveEncoderReversed = false;
       public static final boolean kBackRightDriveEncoderReversed = true;
 
+      //pretend all absolute encoder vals are cancoder
       public static final int kFrontLeftDriveAbsoluteEncoderID = 3;
       public static final int kBackLeftDriveAbsoluteEncoderID = 2;
       public static final int kFrontRightDriveAbsoluteEncoderID = 4;
