@@ -45,7 +45,7 @@ public class RobotContainer {
 // The robot's subsystems
     public final IntakeWheels m_intakeWheels = new IntakeWheels();
     public final Shooter m_shooter = new Shooter();
-    public final chainMount m_chainMount = new chainMount();
+   // public final chainMount m_chainMount = new chainMount();
     public final Intake m_intake = new Intake();
 
 // Joysticks
@@ -69,8 +69,8 @@ private final CommandXboxController features = new CommandXboxController(1);
     SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
     SmartDashboard.putData("Shoot", new Shoot( m_shooter ));
     SmartDashboard.putData("Recive", new Recive( m_intake ));
-    SmartDashboard.putData("getUp", new getUp( m_chainMount ));
-    SmartDashboard.putData("getDown", new getDown( m_chainMount ));
+   // SmartDashboard.putData("getUp", new getUp( m_chainMount ));
+    //SmartDashboard.putData("getDown", new getDown( m_chainMount ));
     SmartDashboard.putData("spinIntakeWheels", new spinIntakeWheels( m_intakeWheels));
     SmartDashboard.putData("AlignSelf", new AlignSelf());
     SmartDashboard.putData("moveArm", new moveArm( m_intake ));

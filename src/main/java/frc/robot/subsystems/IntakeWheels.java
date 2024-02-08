@@ -72,7 +72,7 @@ wheels = new PWMSparkMax(0);
     }
     
 public void spinWeheels(){
-    wheels.setVoltage(9.8);
+    wheels.setVoltage(12.0);
 
         
     }
