@@ -85,7 +85,7 @@ public class Intake extends SubsystemBase {
         double currentPos = intakeEncoder.get();
 
         // Print or use the current position as needed
-        System.out.println("Intake Current Position (Degrees): " + currentPos);
+      //  System.out.println("Intake Current Position (Degrees): " + currentPos);
 
         // Example: Adjust motor speed based on the error between current position and target position
         double error = targetPosition - currentPos;
