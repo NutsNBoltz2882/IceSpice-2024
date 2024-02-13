@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,7 +23,7 @@ public class Intake extends SubsystemBase {
     public static final boolean REVERSE_ENCODER_DIRECTION = false;
 
     // Declare the motor controller and encoder for the intake
-    private PWMSparkMax intakeMotor;
+    private CANSparkMax intakeMotor;
     private Encoder intakeEncoder;
 
     /**
@@ -28,14 +31,14 @@ public class Intake extends SubsystemBase {
      */
     public Intake() {
         // Initialize the intake motor controller
-        intakeMotor = new PWMSparkMax(INTAKE_MOTOR_PORT);
+        intakeMotor = new CANSparkMax(INTAKE_MOTOR_PORT, MotorType.kBrushless);
 
         // Initialize the encoder
         intakeEncoder = new Encoder(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B, REVERSE_ENCODER_DIRECTION, EncodingType.k4X);
         intakeEncoder.setDistancePerPulse(360.0 / 42.0); // Adjust based on your encoder's specifications
 
         // Add the intake motor controller and encoder to the subsystem
-        addChild("Intake Motor", intakeMotor);
+       // addChild("Intake Motor", intakeMotor);
         addChild("Intake Encoder", intakeEncoder);
 
         // Set the motor inversion if needed
