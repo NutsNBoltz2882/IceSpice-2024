@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.LauncherConstants.*;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,11 +19,11 @@ public class CANLauncher extends SubsystemBase {
 
   /** Creates a new Launcher. */
   public CANLauncher() {
-    leftWheels = new CANSparkMax(kLeftID, MotorType.fromId(kLeftID) );
-    rightWheels = new CANSparkMax(kRightID, MotorType.kBrushed);
+    leftWheels = new CANSparkMax(kLeftID, MotorType.kBrushless);
+    rightWheels = new CANSparkMax(kRightID, MotorType.kBrushless);
 
-    leftWheels.setSmartCurrentLimit(kLauncherCurrentLimit);
-    rightWheels.setSmartCurrentLimit(kFeedCurrentLimit);
+    leftWheels.setSmartCurrentLimit(kLeftCurrentLimit);
+    rightWheels.setSmartCurrentLimit(kRightCurrentLimit);
   }
 
   /**
