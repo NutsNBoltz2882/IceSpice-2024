@@ -38,12 +38,19 @@ public final class Constants {
         // Distance between right and left wheels
         public static final double kWheelBase = 0.5461;
         // Distance between front and back wheels
-        public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
+        /*public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
                 new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(kWheelBase / 2, kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
-                new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
+                new Translation2d(-kWheelBase / 2, kTrackWidth / 2));*/
+      public static final Translation2d kFrontLeftLocation = new Translation2d(0.3429, 0.2159);
+      public static final Translation2d kFrontRightLocation = new Translation2d(0.3429, -0.2159);
+      public static final Translation2d kBackLeftLocation = new Translation2d(-0.3429, 0.2159);
+      public static final Translation2d kBackRightLocation = new Translation2d(-0.3429, -0.2159);
       
+      public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
+        kFrontLeftLocation, kFrontRightLocation, kBackLeftLocation, kBackRightLocation
+      );
       
       
       public static final int kFrontLeftDriveMotorPort = 8;
@@ -61,8 +68,8 @@ public final class Constants {
       public static final boolean kFrontRightTurningEncoderReversed = true;
       public static final boolean kBackRightTurningEncoderReversed = true;
 
-      public static final boolean kFrontLeftDriveEncoderReversed = false;//was true
-      public static final boolean kBackLeftDriveEncoderReversed = false;
+      public static final boolean kFrontLeftDriveEncoderReversed = true;//was true
+      public static final boolean kBackLeftDriveEncoderReversed = true;
       public static final boolean kFrontRightDriveEncoderReversed = false;
       public static final boolean kBackRightDriveEncoderReversed = false;
 
@@ -73,7 +80,7 @@ public final class Constants {
       public static final int kBackRightDriveAbsoluteEncoderID = 1;
 
       public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = true;
-      public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
+      public static final boolean kBackLeftDriveAbsoluteEncoderReversed = true;
       public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
       public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
