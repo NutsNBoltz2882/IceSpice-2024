@@ -21,31 +21,74 @@ import edu.wpi.first.units.Units;
 public final class Constants {
 
   public static final class ModuleConstants{
-    //fix all of these dimensions
-    public static final double kWheelDiameterMeters = 0.102; // 4 in converted to m cause units class wont work
-        public static final double kDriveMotorGearRatio = 1 / 6.75;
-        public static final double kTurningMotorGearRatio = 1 / 21.4286;
+    //TODO fix all of these dimensions - double checking these values
+    //wheel diameter in meters WHEEL_DIAMETER_METERS
+    // we have 4in (4") wheels to convert to meters because units class won't work
+    //public static final double kWheelDiameterMeters = 0.102;  // .1016 .. rounded to 102
+    public static final double kWheelDiameterMeters = 0.1016;  // .1016 .. rounded to 102
+
+    // Circumference of the wheel = (C = pi * diameter)
+    // ****** For NEOs, pulsesPerRotation = 42
+    // Mk4 wheelDiameter = Units.inchesToMeters(4.0)
+
+    //metersPerPulse = gearRatio * (Math.PI * wheelDiameter) / pulsesPerRotation;
+    //wheelPositionMeters = encoderPosition * metersPerPulse (you should probably just use the set conversion factor methods on the encoder object)
+
+    // Turning Motor Gear Ratio Calculations
+    // mk4i 150/7:1 for every 150 spins of the motor shaft,the swerve module will spin 7 times.
+    // 0.04667 swerve rotation / motor rotations or 21.4286 motor rotations / swerve rotations
+
+    // mk4i l2 swerve modules
+    public static final double kDriveMotorGearRatio = 1 / 6.75;  // l2 6.75:1 // overall gear ratio
+        public static final double kTurningMotorGearRatio = 1 / 21.4286; // = 0.04667
+
+        // Wheel circumference * overall gear ratio
         public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters;
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
         public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
         public static final double kPTurning = 0.5;
   }
-    public static final class DriveConstants{
+    public static final class DriveConstants{ 
        
-      public static final double kTrackWidth = 0.3683;
+      //public static final double kTrackWidth = 0.3683;
         // Distance between right and left wheels
-        public static final double kWheelBase = 0.5461;
+        //public static final double kWheelBase = 0.5461;
+      //fix all port numbers and max speeds
+
+      /**
+       * The left-to-right distance between the drivetrain wheels
+       * Should be measured from center to center.
+       */
+      // Distance between right and left wheels
+      //public static final double kTrackWidth = 0.3683; // wasn't correct
+      public static final double kTrackWidth = 0.40005; // 15.75 converted
+
+      /**
+       * The front-to-back distance between the drivetrain wheels.
+       * Should be measured from center to center.
+       */
         // Distance between front and back wheels
+        //public static final double kWheelBase = 0.5461; // wasn't correct was inside wheel to wheel not center to center
+        public static final double kWheelBase = 0.65405; // 25.75 inches converted in meters
+
         /*public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
                 new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(kWheelBase / 2, kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));*/
-      public static final Translation2d kFrontLeftLocation = new Translation2d(0.3429, 0.2159);
-      public static final Translation2d kFrontRightLocation = new Translation2d(0.3429, -0.2159);
-      public static final Translation2d kBackLeftLocation = new Translation2d(-0.3429, 0.2159);
-      public static final Translation2d kBackRightLocation = new Translation2d(-0.3429, -0.2159);
+
+      // x,y can coders are from the center of the robot
+      // These values are off a bit but D said should be ok
+      // the can coders are exactly 8 inches from the center
+      //public static final Translation2d kFrontLeftLocation = new Translation2d(0.3429, 0.2159);
+      public static final Translation2d kFrontLeftLocation = new Translation2d(0.2032, 0.3302);
+      //public static final Translation2d kFrontRightLocation = new Translation2d(0.3429, -0.2159);
+      public static final Translation2d kFrontRightLocation = new Translation2d(0.2032, -0.3302);
+      //public static final Translation2d kBackLeftLocation = new Translation2d(-0.3429, 0.2159);
+      public static final Translation2d kBackLeftLocation = new Translation2d(-0.2032, 0.3302);
+      //public static final Translation2d kBackRightLocation = new Translation2d(-0.3429, -0.2159);
+      public static final Translation2d kBackRightLocation = new Translation2d(-0.2032, -0.3302);
       
       public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
         kFrontLeftLocation, kFrontRightLocation, kBackLeftLocation, kBackRightLocation
@@ -72,7 +115,8 @@ public final class Constants {
       public static final boolean kFrontRightDriveEncoderReversed = false;
       public static final boolean kBackRightDriveEncoderReversed = false;
 
-      //pretend all absolute encoder vals are cancoder
+      // pretend all absolute encoder vals are can coder
+      // these sit on top of the swerve drives there are only 4
       public static final int kFrontLeftDriveAbsoluteEncoderID = 3;
       public static final int kBackLeftDriveAbsoluteEncoderID = 2;
       public static final int kFrontRightDriveAbsoluteEncoderID = 4;
@@ -83,7 +127,10 @@ public final class Constants {
       public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
       public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
+      // verify these values
+      //startup vals for encoders
       public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.9273;
+      //public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(35.2);
       public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0.9498;
       public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 6.4053;
       public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -5.5168;
