@@ -83,6 +83,15 @@ public class SwerveModule extends SubsystemBase {
   public double getTurningVelocity(){
     return turningEncoder.getVelocity();
   }
+  public void zeroModule(double pos, double offset){
+     if(pos != offset){
+      turningMotor.set(.5);
+
+        if(pos == offset){
+          stop();
+        }
+     }
+    }
 
   public double getAbsoluteEncoderRad(){
     return CANcoder.getAbsolutePosition().getValueAsDouble();

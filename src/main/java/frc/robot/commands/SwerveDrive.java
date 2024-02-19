@@ -53,6 +53,7 @@ public class SwerveDrive extends Command {
     double xSpeed = xSpdFunction.get();
     double ySpeed = ySpdFunction.get();
     double turningSpeed = turningSpdFunction.get();
+    boolean fieldOriented = fieldOrientedFunction.get();
 
     //apply deadband
     xSpeed = Math.abs(xSpeed) > OperatorConstants.kDeadband ? xSpeed : 0.0;
@@ -66,7 +67,7 @@ public class SwerveDrive extends Command {
 
     //construct chassis speeds
     ChassisSpeeds chassisSpeeds;
-    if (!fieldOrientedFunction.get()){
+    if (fieldOrientedFunction.get()){
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2D());
     }
     else {
@@ -79,7 +80,7 @@ public class SwerveDrive extends Command {
     //output each module state to wheels
     swerveSubsystem.setModuleStates(moduleStates);
 
-        SmartDashboard.putBoolean("field oriented", fieldOrientedFunction.get() );
+        SmartDashboard.putBoolean("field oriented", fieldOrientedFunction.get());
 
   }
 

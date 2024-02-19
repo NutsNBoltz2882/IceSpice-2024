@@ -68,6 +68,10 @@ public class SwerveSubsystem extends SubsystemBase {
      }).start();
 
   }
+  public void zeroMotors(){
+    //if this works, repeat for rest of modules
+    frontLeft.zeroModule(frontLeft.getTurningPosition(), DriveConstants.kFLTurningOffset);
+  }
 
   public void zeroHeading(){
     gyro.reset();
@@ -86,6 +90,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public Rotation2d getRotation2D(){
     return Rotation2d.fromDegrees(getHeading());
   }
+  
 
   @Override
   public void periodic() {

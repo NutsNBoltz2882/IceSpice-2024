@@ -32,7 +32,6 @@ public final class Constants {
         public static final double kPTurning = 0.5;
   }
     public static final class DriveConstants{
-      //fix all port numbers and max speeds
        
       public static final double kTrackWidth = 0.3683;
         // Distance between right and left wheels
@@ -88,6 +87,8 @@ public final class Constants {
       public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0.9498;
       public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 6.4053;
       public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -5.5168;
+
+      public static final double kFLTurningOffset = 0;
 
       public static final double kPhyscialMaxSpeedMetersPerSecond = 5;
       public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
