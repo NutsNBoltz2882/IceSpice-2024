@@ -66,7 +66,7 @@ public class SwerveDrive extends Command {
 
     //construct chassis speeds
     ChassisSpeeds chassisSpeeds;
-    if (fieldOrientedFunction.get()){
+    if (!fieldOrientedFunction.get()){
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2D());
     }
     else {

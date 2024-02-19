@@ -91,8 +91,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Robot Heading", getHeading());
-   
-
+  
   }
 
   public void stopModules(){
@@ -101,7 +100,6 @@ public class SwerveSubsystem extends SubsystemBase {
     backLeft.stop();
     backRight.stop();
   }
-
   public void setModuleStates(SwerveModuleState[] desiredStates){
     SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhyscialMaxSpeedMetersPerSecond);
     frontLeft.setDesiredState(desiredStates[0]);
