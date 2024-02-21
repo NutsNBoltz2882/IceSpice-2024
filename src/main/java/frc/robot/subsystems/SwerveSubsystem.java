@@ -74,7 +74,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public void zeroHeading(){
-    gyro.reset();
+    gyro.zeroYaw();
   }
   public void resetAllEncoders(){
     frontLeft.resetEncoders();
@@ -96,6 +96,11 @@ public class SwerveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Robot Heading", getHeading());
+    SmartDashboard.putNumber("FL encoder", frontLeft.getTurningPosition());
+    SmartDashboard.putNumber("FR encoder", backLeft.getTurningPosition());
+    SmartDashboard.putNumber("BL encoder", frontRight.getTurningPosition());
+    SmartDashboard.putNumber("BR encoder", backRight.getTurningPosition());
+
   
   }
 

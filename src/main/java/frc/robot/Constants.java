@@ -21,7 +21,7 @@ import edu.wpi.first.units.Units;
 public final class Constants {
 
   public static final class ModuleConstants{
-    //TODO fix all of these dimensions - double checking these values
+    // fix all of these dimensions - double checking these values
     //wheel diameter in meters WHEEL_DIAMETER_METERS
     // we have 4in (4") wheels to convert to meters because units class won't work
     //public static final double kWheelDiameterMeters = 0.102;  // .1016 .. rounded to 102
@@ -47,7 +47,7 @@ public final class Constants {
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
         public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
-        public static final double kPTurning = 0.5;
+        public static final double kPTurning = 0.05;
   }
     public static final class DriveConstants{ 
        
@@ -81,14 +81,14 @@ public final class Constants {
       // x,y can coders are from the center of the robot
       // These values are off a bit but D said should be ok
       // the can coders are exactly 8 inches from the center
-      //public static final Translation2d kFrontLeftLocation = new Translation2d(0.3429, 0.2159);
-      public static final Translation2d kFrontLeftLocation = new Translation2d(0.2032, 0.3302);
-      //public static final Translation2d kFrontRightLocation = new Translation2d(0.3429, -0.2159);
-      public static final Translation2d kFrontRightLocation = new Translation2d(0.2032, -0.3302);
-      //public static final Translation2d kBackLeftLocation = new Translation2d(-0.3429, 0.2159);
-      public static final Translation2d kBackLeftLocation = new Translation2d(-0.2032, 0.3302);
-      //public static final Translation2d kBackRightLocation = new Translation2d(-0.3429, -0.2159);
-      public static final Translation2d kBackRightLocation = new Translation2d(-0.2032, -0.3302);
+      public static final Translation2d kFrontLeftLocation = new Translation2d(0.3302, 0.2032);
+      //public static final Translation2d kFrontLeftLocation = new Translation2d(0.2032, 0.3302);
+      public static final Translation2d kFrontRightLocation = new Translation2d(0.3302,-0.2032);
+      //public static final Translation2d kFrontRightLocation = new Translation2d(0.2032, -0.3302);
+      public static final Translation2d kBackLeftLocation = new Translation2d(-0.3302, 0.2032);
+      //public static final Translation2d kBackLeftLocation = new Translation2d(-0.2032, 0.3302);
+      public static final Translation2d kBackRightLocation = new Translation2d(-0.3302, -0.2032);
+      //public static final Translation2d kBackRightLocation = new Translation2d(-0.2032, -0.3302);
       
       public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
         kFrontLeftLocation, kFrontRightLocation, kBackLeftLocation, kBackRightLocation
@@ -96,24 +96,24 @@ public final class Constants {
       
       
       public static final int kFrontLeftDriveMotorPort = 8;
-      public static final int kBackLeftDriveMotorPort = 3;
-      public static final int kFrontRightDriveMotorPort = 6;
+      public static final int kBackLeftDriveMotorPort = 6;
+      public static final int kFrontRightDriveMotorPort = 3;
       public static final int kBackRightDriveMotorPort = 5;
 
-      public static final int kFrontLeftTurningMotorPort = 7;
-      public static final int kBackLeftTurningMotorPort = 10;
-      public static final int kFrontRightTurningMotorPort = 4;
-      public static final int kBackRightTurningMotorPort = 2;
+      public static final int kFrontLeftTurningMotorPort = 10;
+      public static final int kBackLeftTurningMotorPort = 7;
+      public static final int kFrontRightTurningMotorPort = 2;
+      public static final int kBackRightTurningMotorPort = 4;
 
       public static final boolean kFrontLeftTurningEncoderReversed = true;
       public static final boolean kBackLeftTurningEncoderReversed = true;
       public static final boolean kFrontRightTurningEncoderReversed = true;
       public static final boolean kBackRightTurningEncoderReversed = true;
 
-      public static final boolean kFrontLeftDriveEncoderReversed = true;//was true
-      public static final boolean kBackLeftDriveEncoderReversed = true;
-      public static final boolean kFrontRightDriveEncoderReversed = false;
-      public static final boolean kBackRightDriveEncoderReversed = false;
+      public static final boolean kFrontLeftDriveEncoderReversed = false;//was true
+      public static final boolean kBackLeftDriveEncoderReversed = false;
+      public static final boolean kFrontRightDriveEncoderReversed = true;
+      public static final boolean kBackRightDriveEncoderReversed = true;
 
       // pretend all absolute encoder vals are can coder
       // these sit on top of the swerve drives there are only 4
@@ -129,11 +129,11 @@ public final class Constants {
 
       // verify these values
       //startup vals for encoders
-      public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.9273;
+      public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.1282;
       //public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(35.2);
-      public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0.9498;
-      public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 6.4053;
-      public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -5.5168;
+      public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -0.2773;
+      public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -0.1354;
+      public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -0.1098;
 
       public static final double kFLTurningOffset = 0;
 
