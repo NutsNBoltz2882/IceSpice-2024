@@ -98,8 +98,9 @@ public class SwerveModule extends SubsystemBase {
   }
 
   public void resetEncoders(){
-    driveEncoder.setPosition(0);
-    turningEncoder.setPosition(getAbsoluteEncoderRad());
+    driveEncoder.setPosition(0)
+    //hoping and praying wheels are correctly aligned each time...
+    turningEncoder.setPosition(0);
   }
 
   public SwerveModuleState getState(){
