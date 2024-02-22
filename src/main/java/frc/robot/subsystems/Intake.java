@@ -11,9 +11,7 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
-/**
- * The Intake subsystem for handling intake functionality with an integrated encoder.
- */
+// arm subsys
 public class Intake extends SubsystemBase {
 
     // Define constants for the subsystem
@@ -36,7 +34,7 @@ public class Intake extends SubsystemBase {
         // Initialize the encoder
         intakeEncoder = new Encoder(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B, REVERSE_ENCODER_DIRECTION, EncodingType.k4X);
         intakeEncoder.setDistancePerPulse(360.0 / 42.0); // Adjust based on your encoder's specifications
-
+        //calculated degrees for what i need it to do
         // Add the intake motor controller and encoder to the subsystem
        // addChild("Intake Motor", intakeMotor);
         addChild("Intake Encoder", intakeEncoder);
@@ -61,9 +59,6 @@ public class Intake extends SubsystemBase {
 
         // Get the current position in degrees
         double degrees = intakeEncoder.get();
-
-        // Print or use the degrees as needed
-       // System.out.println("Intake Position (Degrees): " + degrees);
     }
 
     /**
@@ -91,13 +86,13 @@ public class Intake extends SubsystemBase {
       //  System.out.println("Intake Current Position (Degrees): " + currentPos);
 
         // Example: Adjust motor speed based on the error between current position and target position
-        double error = targetPosition - currentPos;
+        double ppos = targetPosition - currentPos;
         double kP = 0.01; // Adjust this proportional constant as needed
 
         // Example: If the intake is below the target position, move the arm forward
-        if (Math.abs(error) > 1.0) { // Check if the error is greater than 1 degree to avoid constant movement
+        if (Math.abs(ppos) > 1.0) { // Check if the error is greater than 1 degree to avoid constant movement
             // Calculate motor speed based on the error
-            double motorSpeed = kP * error;
+            double motorSpeed = kP * ppos;
 
             // Set the motor speed to move the arm
             intakeMotor.set(motorSpeed);
@@ -108,12 +103,15 @@ public class Intake extends SubsystemBase {
     }
     public double getIntakeEncoderPosition() {
         return intakeEncoder.get();
+        //gets the intake position
     }
     public void moveArm(double speed) {
         intakeMotor.set(speed);
+        //moves the arm
     }
     public void stopArm() {
         intakeMotor.stopMotor();
+        //stops the arm
     }
 
     // Add additional methods for controlling the subsystem as needed
