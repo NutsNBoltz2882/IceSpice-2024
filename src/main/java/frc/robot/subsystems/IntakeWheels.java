@@ -87,8 +87,8 @@ public class IntakeWheels extends SubsystemBase {
 
     public void spinWheels()  { // Corrected method name from spinWeheels to spinWheels
        //Delays time to ramp up Voltage
-      if(DirectionChanged=false){
-       wheels.setInverted(true);
+      if(DirectionChanged=true){
+       wheels.setInverted(false);
        //sees if the motor direction is flipped
       }
         wheels.setVoltage(ttrig.getLeftTriggerAxis()*-12);
@@ -97,9 +97,9 @@ public class IntakeWheels extends SubsystemBase {
        // wheels.setInverted(sw);
    // }
     public void spin(){
-        wheels.setInverted(true);
+        wheels.setInverted(false);
        if( ttrig.getHID().getBButton()){
-        wheels.setVoltage(6.0);
+        wheels.setVoltage(3.5);
         //spins the wheels to a fixed speed
        
        }else{wheels.setVoltage(0);}
