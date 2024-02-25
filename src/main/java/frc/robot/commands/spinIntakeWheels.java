@@ -57,6 +57,7 @@ public class spinIntakeWheels extends Command {
     @Override
     public void execute() {
         m_intakeWheels.spin();
+       // System.out.println(m_intakeWheels.test());
 
     }
 
