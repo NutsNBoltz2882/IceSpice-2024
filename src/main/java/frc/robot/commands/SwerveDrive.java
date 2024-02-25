@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OperatorConstants;
@@ -40,7 +41,10 @@ public class SwerveDrive extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    swerveSubsystem.zeroHeading();
+    swerveSubsystem.resetAllEncoders();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -49,6 +53,7 @@ public class SwerveDrive extends Command {
     double xSpeed = xSpdFunction.get();
     double ySpeed = ySpdFunction.get();
     double turningSpeed = turningSpdFunction.get();
+    boolean fieldOriented = fieldOrientedFunction.get();
 
     //apply deadband
     xSpeed = Math.abs(xSpeed) > OperatorConstants.kDeadband ? xSpeed : 0.0;
@@ -74,6 +79,9 @@ public class SwerveDrive extends Command {
 
     //output each module state to wheels
     swerveSubsystem.setModuleStates(moduleStates);
+
+        SmartDashboard.putBoolean("field oriented", fieldOrientedFunction.get());
+
   }
 
 

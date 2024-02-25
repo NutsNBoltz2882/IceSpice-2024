@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.AbsoluteEncoder;
 // import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 // import com.revrobotics.RelativeEncoder;
@@ -18,6 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
+import com.ctre.phoenix6.CANBus;
+import com.ctre.phoenix6.hardware.CANcoder;
 
 
 public class SwerveModule extends SubsystemBase {
@@ -30,22 +33,22 @@ public class SwerveModule extends SubsystemBase {
 
   private final PIDController turningPidController;
 
-  private final AnalogInput absoluteEncoder;
+  private final CANcoder CANcoder;
 
-  private final boolean abosoluteEncoderReversed;
+  private final boolean CANCoderReversed;
   private final double absoluteEncoderOffsetRad;
 
   public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
-  int absoluteEncoderId, double absoluteEncoderOffset, boolean abosoluteEncoderReversed) {
-    this.absoluteEncoderOffsetRad = absoluteEncoderOffset;
-    this.abosoluteEncoderReversed = abosoluteEncoderReversed;
-    absoluteEncoder = new AnalogInput(absoluteEncoderId);
+  int CANCoderID, double CANCoderOffset, boolean CANCoderReversed) {
+    this.absoluteEncoderOffsetRad = CANCoderOffset;
+    this.CANCoderReversed = CANCoderReversed;
+     CANcoder = new CANcoder(CANCoderID) ;
     
-    driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless); //if code doesnt work this is prob why
+    driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless); 
     turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
-     driveEncoder = driveMotor.getEncoder();//fill these parameters in tomorrow cause ermm...
-     turningEncoder = turningMotor.getEncoder();//error on lines 44 & 45 r connected to this
+     driveEncoder = driveMotor.getEncoder();
+     turningEncoder = turningMotor.getEncoder();
 
 
     driveMotor.setInverted(driveMotorReversed);
@@ -56,7 +59,7 @@ public class SwerveModule extends SubsystemBase {
     turningEncoder.setPositionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
     turningEncoder.setVelocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
 
-    turningPidController = new PIDController(ModuleConstants.kPTurning, absoluteEncoderId, absoluteEncoderOffset);
+    turningPidController = new PIDController(ModuleConstants.kPTurning, 0, 0);
     turningPidController.enableContinuousInput(-Math.PI, Math.PI);
   }
 
@@ -80,17 +83,24 @@ public class SwerveModule extends SubsystemBase {
   public double getTurningVelocity(){
     return turningEncoder.getVelocity();
   }
+  public void zeroModule(double pos, double offset){
+     if(pos != offset){
+      turningMotor.set(.5);
+
+        if(pos == offset){
+          stop();
+        }
+     }
+    }
 
   public double getAbsoluteEncoderRad(){
-    double angle = absoluteEncoder.getVoltage() / RobotController.getVoltage5V();
-    angle *= 2.0 * Math.PI; 
-    angle -= absoluteEncoderOffsetRad;
-    return angle * (abosoluteEncoderReversed ? -1.0 : 1.0);
+    return CANcoder.getAbsolutePosition().getValueAsDouble();
   }
 
   public void resetEncoders(){
     driveEncoder.setPosition(0);
-    turningEncoder.setPosition(getAbsoluteEncoderRad());
+    //hoping and praying wheels are correctly aligned each time...
+    turningEncoder.setPosition(0);
   }
 
   public SwerveModuleState getState(){
@@ -105,7 +115,7 @@ public class SwerveModule extends SubsystemBase {
     state = SwerveModuleState.optimize(state, getState().angle);
     driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhyscialMaxSpeedMetersPerSecond);
     turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
-    SmartDashboard.putString("Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
+    SmartDashboard.putString("Swerve[" + CANcoder.getDeviceID() + "] state", state.toString());
   }
   public void stop(){
     driveMotor.set(0);

@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ModuleConstants;
+
 import com.kauailabs.navx.frc.AHRS;
 
 public class SwerveSubsystem extends SubsystemBase {
@@ -22,7 +24,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kFrontLeftTurningMotorPort, 
       DriveConstants.kFrontLeftDriveEncoderReversed,
       DriveConstants.kFrontLeftTurningEncoderReversed, 
-      DriveConstants.kFrontLeftDriveAbsoluteEncoderPort,
+      DriveConstants.kFrontLeftDriveAbsoluteEncoderID,
       DriveConstants.kFrontLeftDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kFrontLeftDriveAbsoluteEncoderReversed);
 
@@ -31,7 +33,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kBackLeftTurningMotorPort, 
       DriveConstants.kBackLeftDriveEncoderReversed,
       DriveConstants.kBackLeftTurningEncoderReversed, 
-      DriveConstants.kBackLeftDriveAbsoluteEncoderPort,
+      DriveConstants.kBackLeftDriveAbsoluteEncoderID,
       DriveConstants.kBackLeftDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kBackLeftDriveAbsoluteEncoderReversed);
 
@@ -40,7 +42,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kFrontRightTurningMotorPort, 
       DriveConstants.kFrontRightDriveEncoderReversed,
       DriveConstants.kFrontRightTurningEncoderReversed, 
-      DriveConstants.kFrontRightDriveAbsoluteEncoderPort,
+      DriveConstants.kFrontRightDriveAbsoluteEncoderID,
       DriveConstants.kFrontRightDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kFrontRightDriveAbsoluteEncoderReversed);
 
@@ -49,7 +51,7 @@ public class SwerveSubsystem extends SubsystemBase {
       DriveConstants.kBackRightTurningMotorPort, 
       DriveConstants.kBackRightDriveEncoderReversed,
       DriveConstants.kBackRightTurningEncoderReversed, 
-      DriveConstants.kBackRightDriveAbsoluteEncoderPort,
+      DriveConstants.kBackRightDriveAbsoluteEncoderID,
       DriveConstants.kBackRightDriveAbsoluteEncoderOffsetRad, 
       DriveConstants.kBackRightDriveAbsoluteEncoderReversed);
 
@@ -66,9 +68,19 @@ public class SwerveSubsystem extends SubsystemBase {
      }).start();
 
   }
+  public void zeroMotors(){
+    //if this works, repeat for rest of modules
+    frontLeft.zeroModule(frontLeft.getTurningPosition(), DriveConstants.kFLTurningOffset);
+  }
 
   public void zeroHeading(){
-    gyro.reset();
+    gyro.zeroYaw();
+  }
+  public void resetAllEncoders(){
+    frontLeft.resetEncoders();
+    backLeft.resetEncoders();
+    frontRight.resetEncoders();
+    backRight.resetEncoders();
   }
 
   public double getHeading(){
@@ -78,11 +90,18 @@ public class SwerveSubsystem extends SubsystemBase {
   public Rotation2d getRotation2D(){
     return Rotation2d.fromDegrees(getHeading());
   }
+  
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Robot Heading", getHeading());
+    SmartDashboard.putNumber("FL encoder", frontLeft.getTurningPosition());
+    SmartDashboard.putNumber("FR encoder", backLeft.getTurningPosition());
+    SmartDashboard.putNumber("BL encoder", frontRight.getTurningPosition());
+    SmartDashboard.putNumber("BR encoder", backRight.getTurningPosition());
+
+  
   }
 
   public void stopModules(){
@@ -91,7 +110,6 @@ public class SwerveSubsystem extends SubsystemBase {
     backLeft.stop();
     backRight.stop();
   }
-
   public void setModuleStates(SwerveModuleState[] desiredStates){
     SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhyscialMaxSpeedMetersPerSecond);
     frontLeft.setDesiredState(desiredStates[0]);
