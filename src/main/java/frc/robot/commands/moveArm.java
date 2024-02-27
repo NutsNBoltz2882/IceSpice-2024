@@ -64,7 +64,7 @@ public class moveArm extends Command {
             double motorSpeed = kP * error;
 
             // Set the motor speed to move the arm
-            m_intake.moveArm(motorSpeed);
+            m_intake.moveArm(0.4);
 
             // Display the current position on SmartDashboard
             SmartDashboard.putNumber("Intake Current Position (Degrees)", currentPos);

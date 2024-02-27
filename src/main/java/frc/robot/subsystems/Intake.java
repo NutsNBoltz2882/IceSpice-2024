@@ -38,8 +38,9 @@ public class Intake extends SubsystemBase {
      */
     public Intake() {
         // Initialize the intake motor controller
-        intakeMotor = new CANSparkMax(2, MotorType.kBrushless);
+        intakeMotor = new CANSparkMax(13, MotorType.kBrushless);
         encoder = intakeMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.fromId(INTAKE_MOTOR_PORT));
+        
 
         // Initialize the encoder
        // intakeEncoder = new Encoder(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B, REVERSE_ENCODER_DIRECTION, EncodingType.k4X);
@@ -51,7 +52,7 @@ public class Intake extends SubsystemBase {
         addChild("Intake Encoder", intakeEncoder);
 
         // Set the motor inversion if needed
-        intakeMotor.setInverted(false);
+        intakeMotor.setInverted(true);
 
         // Add the intake encoder to Shuffleboard with automatic updates
         
