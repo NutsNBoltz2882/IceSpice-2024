@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.SwerveDrive;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,9 +26,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+  private final Intake intake = new Intake(IntakeConstants.rollerMotorID, IntakeConstants.liftMotorID);
 
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_intakeController = 
+      new CommandXboxController((OperatorConstants.kIntakeControllerPort));
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -35,6 +41,12 @@ public class RobotContainer {
       () -> -m_driverController.getLeftX(),
       () -> m_driverController.getRightX(),
       () -> !m_driverController.start().getAsBoolean()));
+    
+    intake.setDefaultCommand(new IntakeCmd(
+      intake, 
+      () -> m_intakeController.getRightY(),
+      () -> m_intakeController.getLeftX()));
+    
       /*swerveSubsystem.setDefaultCommand(new RunCommand(
         () ->  
         new SwerveDrive(
@@ -51,6 +63,16 @@ public class RobotContainer {
   private void configureBindings() {
      if(m_driverController.a().getAsBoolean())
        swerveSubsystem.zeroHeading();
+
+    if(m_intakeController.leftBumper().getAsBoolean())
+      intake.setRollerSpd(.8);
+
+    if(m_intakeController.rightBumper().getAsBoolean())
+      intake.setRollerSpd(-.8);
+    
+    
+
+     // chat what the flip m_intakeController.leftBumper(() -> intake.setRollerSpd(.8));
    
      
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,

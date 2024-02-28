@@ -10,9 +10,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.EncoderType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAlternateEncoder;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -23,9 +25,9 @@ public class Intake extends SubsystemBase {
   private final RelativeEncoder liftEncoder;
   private final SparkMaxAlternateEncoder.Type encType = SparkMaxAlternateEncoder.Type.kQuadrature;
 
-    public Intake(CANSparkMax rm, CANSparkMax lm) {
-    rollerMotor = rm;
-    liftMotor = lm;
+    public Intake(int rm, int lm) {
+    rollerMotor = new CANSparkMax(rm, MotorType.kBrushless);
+    liftMotor = new CANSparkMax(lm, MotorType.kBrushless);
     liftEncoder = liftMotor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, 8192);
 
   }
@@ -33,6 +35,7 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("lift encoder", getEncVal());
   }
   public void setRollerSpd(double spd){
     rollerMotor.set(spd);
@@ -40,5 +43,11 @@ public class Intake extends SubsystemBase {
   public void setLiftSpd(double spd){
     //use if statement to set limit
     liftMotor.set(spd);
+  }
+  public void stopLift(){
+    liftMotor.set(0);
+  }
+  public double getEncVal(){
+    return liftEncoder.getPosition();
   }
 }

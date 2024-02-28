@@ -145,9 +145,16 @@ public final class Constants {
       public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
 
     }
+    public static class IntakeConstants {
+      public static final int rollerMotorID = 0; //placeholder
+      public static final int liftMotorID = 0; //placeholder
+      public static final double encoderMax = 0;
+      public static final double encoderMin = 0;
+    }
 
     public static class OperatorConstants {
       public static final int kDriverControllerPort = 0;
+      public static final int kIntakeControllerPort = 1;
       public static final double kDeadband = 0.05;
       public static final int kDriverYAxis = 1;
       public static final int kDriverXAxis = 0;
