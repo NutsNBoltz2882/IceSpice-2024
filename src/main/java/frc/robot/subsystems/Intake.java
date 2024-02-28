@@ -23,8 +23,6 @@ public class Intake extends SubsystemBase {
   private final CANSparkMax liftMotor;
 
   private final RelativeEncoder liftEncoder;
-  private final SparkMaxAlternateEncoder.Type encType = SparkMaxAlternateEncoder.Type.kQuadrature;
-
     public Intake(int rm, int lm) {
     rollerMotor = new CANSparkMax(rm, MotorType.kBrushless);
     liftMotor = new CANSparkMax(lm, MotorType.kBrushless);

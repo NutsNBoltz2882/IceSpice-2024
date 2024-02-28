@@ -9,6 +9,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCmd;
+import frc.robot.commands.IntakeDown;
 import frc.robot.commands.SwerveDrive;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -44,8 +45,9 @@ public class RobotContainer {
     
     intake.setDefaultCommand(new IntakeCmd(
       intake, 
-      () -> m_intakeController.getRightY(),
-      () -> m_intakeController.getLeftX()));
+      () -> m_intakeController.leftBumper().getAsBoolean(),
+      () -> m_intakeController.rightBumper().getAsBoolean(),
+      () -> m_intakeController.getLeftY()));
     
       /*swerveSubsystem.setDefaultCommand(new RunCommand(
         () ->  
@@ -64,11 +66,14 @@ public class RobotContainer {
      if(m_driverController.a().getAsBoolean())
        swerveSubsystem.zeroHeading();
 
-    if(m_intakeController.leftBumper().getAsBoolean())
+    if(m_intakeController.a().getAsBoolean());
+      new IntakeDown();
+
+    /*if(m_intakeController.leftBumper().getAsBoolean())
       intake.setRollerSpd(.8);
 
     if(m_intakeController.rightBumper().getAsBoolean())
-      intake.setRollerSpd(-.8);
+      intake.setRollerSpd(-.8);*/
     
     
 

@@ -14,10 +14,12 @@ import frc.robot.subsystems.Intake;
 public class IntakeCmd extends Command {
   /** Creates a new IntakeCmd. */
   private final Intake intake;
-  private final Supplier<Double> rollerSpd, liftSpd;
-  public IntakeCmd(Intake in, Supplier<Double> rollerSpd, Supplier<Double> liftSpd) {
+  private final Supplier<Boolean> rollerIn, rollerOut;
+  private final Supplier<Double> liftSpd;
+  public IntakeCmd(Intake in, Supplier<Boolean> rollerIn, Supplier<Boolean> rollerOut, Supplier<Double> liftSpd) {
     intake = in;
-    this.rollerSpd = rollerSpd;
+    this.rollerIn = rollerIn;
+    this.rollerOut = rollerOut;
     this.liftSpd = liftSpd;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
@@ -31,14 +33,17 @@ public class IntakeCmd extends Command {
   @Override
   public void execute() {
     intake.setLiftSpd(liftSpd.get());
-    intake.setRollerSpd(rollerSpd.get());
+    if(rollerIn.get() == true)
+      intake.setRollerSpd(IntakeConstants.rollerInSpd);
+    if(rollerOut.get() == true)
+      intake.setRollerSpd(IntakeConstants.rollerOutSpd);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     //set encoder limits here
-    if(intake.getEncVal() <= IntakeConstants.encoderMin || intake.getEncVal() >= IntakeConstants.encoderMax){
+    if(intake.getEncVal() < IntakeConstants.encoderMin || intake.getEncVal() > IntakeConstants.encoderMax){
       intake.stopLift();
     }
   }
