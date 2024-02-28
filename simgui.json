@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -44,6 +45,28 @@
       },
       "open": true
     },
+=======
+  "HALProvider": {
+    "Other Devices": {
+      "window": {
+        "visible": false
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo"
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "SmartDashboard": {
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+>>>>>>> main
     "visible": true
   }
 }
