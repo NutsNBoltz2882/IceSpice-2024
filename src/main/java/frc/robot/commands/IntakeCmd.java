@@ -32,7 +32,10 @@ public class IntakeCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if(liftUp.get() == true)
+      intake.setLiftSpd(.4);
+    if(liftDown.get() == true)
+      intake.setLiftSpd(-.4);
     if(rollerIn.get() == true)
       intake.setRollerSpd(IntakeConstants.rollerInSpd);
     if(rollerOut.get() == true)
