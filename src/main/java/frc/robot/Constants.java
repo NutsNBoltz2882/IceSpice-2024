@@ -150,8 +150,8 @@ public final class Constants {
       public static final int liftMotorID = 13; 
       public static final double encoderMax = 0;
       public static final double encoderMin = 0;
-      public static final double rollerInSpd = 0;
-      public static final double rollerOutSpd = 0;
+      public static final double rollerInSpd = .9;
+      public static final double rollerOutSpd = -.9;
       public static final double liftInPosition = 0;
       public static final double liftShootPosition = 0;
     }
