@@ -47,7 +47,8 @@ public class RobotContainer {
       intake, 
       () -> m_intakeController.leftBumper().getAsBoolean(),
       () -> m_intakeController.rightBumper().getAsBoolean(),
-      () -> m_intakeController.getLeftY()));
+      () -> m_intakeController.y().getAsBoolean(),
+      () -> m_intakeController.a().getAsBoolean()));
     
       /*swerveSubsystem.setDefaultCommand(new RunCommand(
         () ->  
@@ -63,11 +64,11 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-     if(m_driverController.a().getAsBoolean())
+     if(m_driverController.start().getAsBoolean())
        swerveSubsystem.zeroHeading();
 
-    if(m_intakeController.a().getAsBoolean());
-      new IntakeDown(intake);
+    // if(m_intakeController.a().getAsBoolean());
+    //   new IntakeDown(intake);
 
     /*if(m_intakeController.leftBumper().getAsBoolean())
       intake.setRollerSpd(.8);

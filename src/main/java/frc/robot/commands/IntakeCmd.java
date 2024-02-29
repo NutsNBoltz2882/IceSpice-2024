@@ -14,13 +14,13 @@ import frc.robot.subsystems.Intake;
 public class IntakeCmd extends Command {
   /** Creates a new IntakeCmd. */
   private final Intake intake;
-  private final Supplier<Boolean> rollerIn, rollerOut;
-  private final Supplier<Double> liftSpd;
-  public IntakeCmd(Intake in, Supplier<Boolean> rollerIn, Supplier<Boolean> rollerOut, Supplier<Double> liftSpd) {
+  private final Supplier<Boolean> rollerIn, rollerOut, liftUp, liftDown;
+  public IntakeCmd(Intake in, Supplier<Boolean> rollerIn, Supplier<Boolean> rollerOut, Supplier<Boolean> liftUp, Supplier<Boolean> liftDown) {
     intake = in;
     this.rollerIn = rollerIn;
     this.rollerOut = rollerOut;
-    this.liftSpd = liftSpd;
+    this.liftUp = liftUp;
+    this.liftDown = liftDown;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
   }
@@ -32,7 +32,7 @@ public class IntakeCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.setLiftSpd(liftSpd.get());
+    
     if(rollerIn.get() == true)
       intake.setRollerSpd(IntakeConstants.rollerInSpd);
     if(rollerOut.get() == true)
