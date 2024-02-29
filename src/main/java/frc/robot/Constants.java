@@ -146,8 +146,8 @@ public final class Constants {
 
     }
     public static class IntakeConstants {
-      public static final int rollerMotorID = 0; // all of these r placeholders
-      public static final int liftMotorID = 0; 
+      public static final int rollerMotorID = 12; // all of these r placeholders
+      public static final int liftMotorID = 13; 
       public static final double encoderMax = 0;
       public static final double encoderMin = 0;
       public static final double rollerInSpd = 0;
