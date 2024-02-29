@@ -67,7 +67,7 @@ public class RobotContainer {
        swerveSubsystem.zeroHeading();
 
     if(m_intakeController.a().getAsBoolean());
-      new IntakeDown();
+      new IntakeDown(intake);
 
     /*if(m_intakeController.leftBumper().getAsBoolean())
       intake.setRollerSpd(.8);

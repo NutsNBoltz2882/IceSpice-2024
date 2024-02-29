@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeDown extends InstantCommand {
-  private final Intake intake = new Intake(IntakeConstants.rollerMotorID, IntakeConstants.liftMotorID);
-  public IntakeDown() {
+  private final Intake intake;
+  public IntakeDown(Intake in) {
+    intake = in;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
   }
