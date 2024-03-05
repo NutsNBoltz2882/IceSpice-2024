@@ -16,6 +16,7 @@ import static edu.wpi.first.units.Units.*;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.units.Units;
 
 public final class Constants {
@@ -143,6 +144,12 @@ public final class Constants {
 
       public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhyscialMaxSpeedMetersPerSecond / 3;
       public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
+
+      public static final double k_AutoCorrectTurn = 0;
+
+    public static final int k_AutoCorrectSpeed = 0;
+
+    public static double k_AutoCorrectDist;
 
     }
     public static class IntakeConstants {

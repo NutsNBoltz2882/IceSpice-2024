@@ -117,8 +117,12 @@ public class SwerveModule extends SubsystemBase {
     turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     SmartDashboard.putString("Swerve[" + CANcoder.getDeviceID() + "] state", state.toString());
   }
+  public Rotation2d getRotation2d() {
+    return Rotation2d.fromRadians(getAbsoluteEncoderRad());
+  }
   public void stop(){
     driveMotor.set(0);
     turningMotor.set(0);
   }
+  
 }

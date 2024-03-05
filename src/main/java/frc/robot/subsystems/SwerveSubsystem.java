@@ -90,7 +90,6 @@ public class SwerveSubsystem extends SubsystemBase {
   public Rotation2d getRotation2D(){
     return Rotation2d.fromDegrees(getHeading());
   }
-  
 
   @Override
   public void periodic() {
@@ -103,6 +102,42 @@ public class SwerveSubsystem extends SubsystemBase {
 
   
   }
+  public void arcadeDrive(double linearSpeed, double angularSpeed) {
+    // Calculate the desired module states based on the linear and angular speeds
+    SwerveModuleState[] desiredStates = new SwerveModuleState[4];
+    double maxSpeed = 2.0; // Maximum desired speed
+    double maxAngularSpeed = Math.PI; // Maximum desired angular speed
+
+    double kx = linearSpeed * Math.cos(getRotation2D().getRadians()) + angularSpeed * Math.sin(getRotation2D().getRadians());
+    double ky = linearSpeed * Math.sin(getRotation2D().getRadians()) - angularSpeed * Math.cos(getRotation2D().getRadians());
+    double omega = (kx / 0.61 - ky / 0.58) * Math.atan2(getRotation2D().getCos(), getRotation2D().getSin());
+
+    double kMax = Math.hypot(kx, ky);
+    double omegaMax = Math.abs(omega);
+
+    if (kMax > maxSpeed) {
+        kx /= kMax;
+        ky /= kMax;
+        kMax = maxSpeed;
+    }
+
+    if (omegaMax > maxAngularSpeed) {
+        omega /= omegaMax;
+        omegaMax = maxAngularSpeed;
+    }
+
+    kx *= kMax;
+    ky *= kMax;
+    omega *= omegaMax;
+
+    desiredStates[0] = new SwerveModuleState(kx, Rotation2d.fromRadians(getRotation2D().getRadians() + 0));
+    desiredStates[1] = new SwerveModuleState(ky, Rotation2d.fromRadians(getRotation2D().getRadians() + Math.PI / 2));
+    desiredStates[2] = new SwerveModuleState(-kx, Rotation2d.fromRadians(getRotation2D().getRadians() + Math.PI));
+    desiredStates[3] = new SwerveModuleState(-ky, Rotation2d.fromRadians(getRotation2D().getRadians() + 3 * Math.PI / 2));
+
+    // Set the desired module states
+    setModuleStates(desiredStates);
+}
 
   public void stopModules(){
     frontLeft.stop();

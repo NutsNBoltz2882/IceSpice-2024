@@ -1,5 +1,5 @@
 package frc.robot.commands;
-
+import java.lang.Math;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.LimeLight;
@@ -49,14 +49,14 @@ public void execute() {
 
 
     // Determine turn direction based on horizontal offset (tx)
-    if (Math.abs(m_LimeLight.tx) > DrivetrainConstants.k_AutoCorrectTurn) {
-        turnAdjust = m_LimeLight.tx > 0 ? -DrivetrainConstants.k_AutoCorrectSpeed : DrivetrainConstants.k_AutoCorrectSpeed;
+    if (Math.abs(m_LimeLight.tx.getDouble(0)) > DriveConstants.k_AutoCorrectTurn) {
+        turnAdjust = m_LimeLight.tx.getDouble(0)> 0 ? -DriveConstants.k_AutoCorrectSpeed : DriveConstants.k_AutoCorrectSpeed;
     }
 
 
     // Determine move direction based on target area (ta)
-    if (Math.abs(m_LimeLight.ta - DrivetrainConstants.k_AutoCorrectDist) > 0.1) {
-        moveAdjust = m_LimeLight.ta > DrivetrainConstants.k_AutoCorrectDist ? -DrivetrainConstants.k_AutoCorrectSpeed : DrivetrainConstants.k_AutoCorrectSpeed;
+    if (Math.abs(m_LimeLight.ta.getDouble(0) - DriveConstants.k_AutoCorrectDist) > 0.1) {
+        moveAdjust = m_LimeLight.ta.getDouble(0) > DriveConstants.k_AutoCorrectDist ? -DriveConstants.k_AutoCorrectSpeed : DriveConstants.k_AutoCorrectSpeed;
     }
 
 
