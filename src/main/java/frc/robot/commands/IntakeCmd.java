@@ -34,16 +34,18 @@ public class IntakeCmd extends Command {
   public void execute() {
     if(liftUp.get() == true)
       intake.setLiftSpd(.4);
+    if(liftUp.get() == false)
+      intake.setLiftSpd(0);
     if(liftDown.get() == true)
       intake.setLiftSpd(-.4);
-    if(liftDown.get() == false)
-      intake.setLiftSpd(0);
+    
     if(rollerIn.get() == true)
       intake.setRollerSpd(IntakeConstants.rollerInSpd);
-    if(rollerOut.get() == true)
-      intake.setRollerSpd(IntakeConstants.rollerOutSpd);
     if(rollerIn.get() == false)
       intake.setRollerSpd(0);
+    if(rollerOut.get() == true)
+      intake.setRollerSpd(IntakeConstants.rollerOutSpd);
+    
   }
 
   // Called once the command ends or is interrupted.

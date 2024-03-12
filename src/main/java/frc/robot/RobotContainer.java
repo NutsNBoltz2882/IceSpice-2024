@@ -45,8 +45,8 @@ public class RobotContainer {
     
     intake.setDefaultCommand(new IntakeCmd(
       intake, 
-      () -> m_intakeController.leftBumper().getAsBoolean(),
-      () -> m_intakeController.rightBumper().getAsBoolean(),
+      () -> m_intakeController.b().getAsBoolean(),
+      () -> m_intakeController.x().getAsBoolean(),
       () -> m_intakeController.y().getAsBoolean(),
       () -> m_intakeController.a().getAsBoolean()));
     
