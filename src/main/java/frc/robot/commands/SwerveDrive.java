@@ -11,29 +11,29 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.SwerveSubsystem;
 
 public class SwerveDrive extends Command {
-
+ 
   private final SwerveSubsystem swerveSubsystem;
-  private final Supplier<Double> xSpdFunction, ySpdFunction, turningSpdFunction;
-  private final Supplier<Boolean> fieldOrientedFunction;
+  private final double  xSpdFunction, ySpdFunction, turningSpdFunction;
+  private final  boolean fieldOrientedFunction;
 
   private final SlewRateLimiter xLimiter, yLimiter, turningLimiter;
   /** Creates a new SwerveDrive. */
-  public SwerveDrive(SwerveSubsystem swerveSubsystem, Supplier<Double> xSpdFunction, Supplier<Double> ySpdFunction,
-  Supplier<Double> turningSpdFunction, Supplier<Boolean> fieldOrientedFunction) {
-    this.swerveSubsystem = swerveSubsystem;
-    this.xSpdFunction = xSpdFunction;
-    this.ySpdFunction = ySpdFunction;
-    this.turningSpdFunction = turningSpdFunction;
-    this.fieldOrientedFunction = fieldOrientedFunction;
+  public SwerveDrive(SwerveSubsystem swerveSubsystem, CommandXboxController drive) {
+     this.swerveSubsystem = swerveSubsystem;
+     xSpdFunction = drive.getLeftY();
+     ySpdFunction = drive.getLeftX();
+     turningSpdFunction = drive.getRightX();
+    fieldOrientedFunction = !drive.start().getAsBoolean();
 
-    this.xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
-    this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
-    this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
+     xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
+     yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
+     turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveSubsystem);
@@ -50,10 +50,10 @@ public class SwerveDrive extends Command {
   @Override
   public void execute() {
     //get joystick inputs
-    double xSpeed = xSpdFunction.get();
-    double ySpeed = ySpdFunction.get();
-    double turningSpeed = turningSpdFunction.get();
-    boolean fieldOriented = fieldOrientedFunction.get();
+    double xSpeed = xSpdFunction;
+    double ySpeed = ySpdFunction;
+    double turningSpeed = turningSpdFunction;
+    boolean fieldOriented = fieldOrientedFunction;
 
     //apply deadband
     xSpeed = Math.abs(xSpeed) > OperatorConstants.kDeadband ? xSpeed : 0.0;
@@ -67,7 +67,7 @@ public class SwerveDrive extends Command {
 
     //construct chassis speeds
     ChassisSpeeds chassisSpeeds;
-    if (fieldOrientedFunction.get()){
+    if (fieldOrientedFunction){
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2D());
     }
     else {
@@ -80,7 +80,7 @@ public class SwerveDrive extends Command {
     //output each module state to wheels
     swerveSubsystem.setModuleStates(moduleStates);
 
-        SmartDashboard.putBoolean("field oriented", fieldOrientedFunction.get());
+        SmartDashboard.putBoolean("field oriented", fieldOrientedFunction);
 
   }
 
